@@ -2,12 +2,16 @@ import React from 'react'
 
 function Header(props) {
 
-  const awardYears = props.awardYears;
-  console.log(awardYears);
+  const showYear = props.awardYears;
+  console.log(showYear);
   return (
     <div>
-      <h1 className='text-center text-blue-500 border rounded-3xl border-red-700 text-2xl font-bold'>Nobel Prize</h1>      
-      <p>{ awardYears ?  "ประจำปี ค.ศ. : " + awardYears : ""}</p>
+      <div className='border border-red-700 bg-yellow-400'>
+        <h1 className='text-center text-blue-500 text-2xl font-bold'>Nobel Prize</h1> 
+        <p className='text-center'>{ showYear !=0 ?  "ประจำปี ค.ศ. : " + showYear : ""}</p>
+      </div>
+           
+      
     </div>
     
   )
