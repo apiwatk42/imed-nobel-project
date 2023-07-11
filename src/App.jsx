@@ -1,11 +1,12 @@
-import { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Filters from "./components/Filters";
 import Details from "./components/Details";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [data, setData] = useState([]);
 
   return (
     <>
@@ -13,8 +14,8 @@ function App() {
         <Header />
         <div className="flex justify-center">
           <Filters />
-          <Details />
         </div>
+        <Details />
       </div>
     </>
   );
