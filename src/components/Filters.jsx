@@ -6,8 +6,8 @@ import { useState } from "react";
 function Filters(props) {
   
   const setawardYears = props.setawardYears;
-
   const [selectYear, setSelectYear] = useState(new Date().getFullYear());
+  const [totalPrize, setTotalPrize] = useState(0);
 
   let fullYears = [];
 
@@ -20,46 +20,49 @@ function Filters(props) {
     label: result,
   }));
 
-  const fetchData = async (year) => {
-    try {
-      const response = await axios.get(
-        `https://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=${year}`
-      );
-      const NobelprizeData = response.data.nobelPrizes;
-      console.log(NobelprizeData);
-      props.setNobelPrizeData(NobelprizeData);
-    } catch (error) {
-      console.error(error);
-    }
-     
+  const fetchApi = async (year) => {
+    axios
+      .get(`https://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=${year}`)
+      .then((response) => {
+        const NobelprizeData = response.data.nobelPrizes;
+        console.log(NobelprizeData);
+        props.setNobelPrizeData(NobelprizeData);
+
+        const totalPrizeAmount = response.data.nobelPrizes.reduce((sum, prize) => {
+          return sum + (prize.prizeAmount || 0);
+        }, 0);
+
+        setTotalPrize(totalPrizeAmount);
+      })
+      .catch((error) => {
+        alert("Error: API");
+        console.error(error);
+      });
   };
- 
+
   return (
     <div>
-      <div className="flex justify-center items-center h-[85vh] w-[36rem] border border-red-700 mt-5">
+      <div className="flex justify-center items-center h-[85vh] w-[36rem] border border-red-700 bg-slate-500 mt-5">
         <div className="">
           <Select
+            showSearch
             onChange={(value) => setSelectYear(value)}
             defaultValue={selectYear}
             style={{ width: 120 }}
             options={getYear}
           />
           <Button
-            className="mx-5 mt-5"
+            className="mx-5 mt-5 bg-lime-300 border border-green-500"
             onClick={() => {
-              fetchData(selectYear);
+              fetchApi(selectYear);
               setawardYears(selectYear);
             }}
           >
             Apply
           </Button>
+          <div className="mt-5 text-red-600 font-bold text-xl"> <span className="text-white">Prize Amount :</span> {totalPrize}</div>
         </div>
       </div>
-
-      {/* <div>
-        
-        Prize amount : {totalPrizeAmount}
-      </div> */}
     </div>
   );
 }

@@ -2,10 +2,9 @@ import "./App.css";
 import Header from "./components/Header";
 import Filters from "./components/Filters";
 import Details from "./components/Details";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
-  //const [data, setData] = useState([]);
   const [NobelprizeData, setNobelPrizeData] = useState([]);
   const [awardYears, setawardYears] = useState(0);
 
@@ -15,7 +14,6 @@ function App() {
         <Header awardYears={awardYears} />
         <div className="flex justify-center">
           <Filters
-            //data={data}
             setawardYears={setawardYears}
             setNobelPrizeData={setNobelPrizeData}            
           />
