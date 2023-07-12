@@ -10,16 +10,16 @@ function App() {
 
   return (
     <>
-      <div className="justify-center mx-5 my-5">
+      <div className="min-h-screen mx-5 mt-5">
         <Header awardYears={awardYears} />
-        <div className="flex justify-center">
+        <div className="flex flex-col md:flex-row justify-center w-full">
           <Filters
             setawardYears={setawardYears}
-            setNobelPrizeData={setNobelPrizeData}            
+            setNobelPrizeData={setNobelPrizeData}
           />
-          <Details 
-            NobelprizeData={NobelprizeData}
-          />
+          <div className="flex justify-center w-full">
+            <Details NobelprizeData={NobelprizeData} />
+          </div>
         </div>
       </div>
     </>

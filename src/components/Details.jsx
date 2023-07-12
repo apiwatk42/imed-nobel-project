@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "antd";
 
 function Details(props) {
-  
+
   const NobelprizeData = props.NobelprizeData;
 
   const columns = [
@@ -27,37 +27,40 @@ function Details(props) {
       key: "motivation",
     },
   ];
-
-  const data = props.NobelprizeData.flatMap((value, index) => {
+  
+  const detail = props.NobelprizeData.flatMap((value, index) => {
     const { categoryFullName, awardYear } = value;
     if (value.laureates === undefined)
       return {
+        key: `no-laureates-${index}`,
         index: index + 1,
         awardName: categoryFullName.en,
         awardYear: awardYear,
         laureates: " - ",
-        motivation: nobel.topMotivation?.en,
+        motivation: value.topMotivation?.en,
       };
     else
-      return value.laureates.map((authorNobel) => ({
+      return value.laureates.map((NobelList, subIndex) => ({
+        key: `laureate-${index}-${subIndex}`,
         index: index + 1,
         awardName: categoryFullName.en,
         awardYear: awardYear,
-        laureates: authorNobel.knownName?.en || authorNobel.orgName?.en,
-        motivation: authorNobel.motivation.en,
+        laureates: NobelList.knownName?.en || NobelList.orgName?.en,
+        motivation: NobelList.motivation.en,
       }));
   });
 
+
   return (
-    <div className="ml-5">
-      <div className="flex justify-center items-center h-[85vh] w-[80rem] border border-red-700 bg-slate-500 mt-5">
-        <Table
-          className="border-b-2 border border-red-700"
-          columns={columns}
-          dataSource={data}
-        />
-      </div>
+    <div>
+    <div className="justify-center items-center pt-5 pl-5 h-auto w-auto md:h-[85vh] md:w-[80rem]">
+      <Table
+        className="border border-black"
+        columns={columns}
+        dataSource={detail}
+      />
     </div>
+  </div>
   );
 }
 

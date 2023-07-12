@@ -4,7 +4,7 @@ import { Select, Button } from "antd";
 import { useState } from "react";
 
 function Filters(props) {
-  
+
   const setawardYears = props.setawardYears;
   const [selectYear, setSelectYear] = useState(new Date().getFullYear());
   const [totalPrize, setTotalPrize] = useState(0);
@@ -42,8 +42,8 @@ function Filters(props) {
 
   return (
     <div>
-      <div className="flex justify-center items-center h-[85vh] w-[36rem] border border-red-700 bg-slate-500 mt-5">
-        <div className="">
+      <div className="flex justify-center items-center h-auto w-auto md:h-[85vh] md:w-[37rem] border border-black bg-slate-500 mt-5">
+        <div>
           <Select
             showSearch
             onChange={(value) => setSelectYear(value)}
@@ -52,7 +52,7 @@ function Filters(props) {
             options={getYear}
           />
           <Button
-            className="mx-5 mt-5 bg-lime-300 border border-green-500"
+            className="mx-5 mt-5 bg-lime-300 border-2 border-green-600"
             onClick={() => {
               fetchApi(selectYear);
               setawardYears(selectYear);
