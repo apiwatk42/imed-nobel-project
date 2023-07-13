@@ -10,14 +10,14 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen mx-5 mt-5">
+      <div className="mx-5 mt-5">
         <Header awardYears={awardYears} />
-        <div className="flex flex-col md:flex-row justify-center w-full">
+        <div className="flex flex-col md:flex-row justify-center">
           <Filters
             setawardYears={setawardYears}
             setNobelPrizeData={setNobelPrizeData}
           />
-          <div className="flex justify-center w-full">
+          <div className="flex justify-center">
             <Details NobelprizeData={NobelprizeData} />
           </div>
         </div>

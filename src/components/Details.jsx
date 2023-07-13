@@ -50,15 +50,15 @@ function Details(props) {
   });
 
   const paginationConfig = {
-    pageSize: 5,
+    pageSize: 7,
     total: detail.length,
   };
 
   return (
     <div className="justify-center items-center">
-      <div className="md:h-[85vh] md:w-[80rem] pt-5 pl-5">
+      <div className="md:h-[85vh] md:w-[80rem] pt-5 md:pl-5">
       <Table  
-        className="border border-black max-h-min"     
+        className="border border-black"     
         columns={columns}
         dataSource={detail}
         scroll={true}
