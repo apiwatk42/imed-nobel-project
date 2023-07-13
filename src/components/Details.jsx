@@ -2,7 +2,6 @@ import React from "react";
 import { Table } from "antd";
 
 function Details(props) {
-
   const NobelprizeData = props.NobelprizeData;
 
   const columns = [
@@ -27,7 +26,7 @@ function Details(props) {
       key: "motivation",
     },
   ];
-  
+
   const detail = props.NobelprizeData.flatMap((value, index) => {
     const { categoryFullName, awardYear } = value;
     if (value.laureates === undefined)
@@ -50,17 +49,23 @@ function Details(props) {
       }));
   });
 
+  const paginationConfig = {
+    pageSize: 5,
+    total: detail.length,
+  };
 
   return (
-    <div>
-    <div className="justify-center items-center pt-5 pl-5 h-auto w-auto md:h-[85vh] md:w-[80rem]">
-      <Table
-        className="border border-black"
+    <div className="justify-center items-center">
+      <div className="md:h-[85vh] md:w-[80rem] pt-5 pl-5">
+      <Table  
+        className="border border-black max-h-min"     
         columns={columns}
         dataSource={detail}
+        scroll={true}
+        pagination={paginationConfig}
       />
     </div>
-  </div>
+    </div>
   );
 }
 
